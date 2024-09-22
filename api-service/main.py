@@ -1,0 +1,1 @@
+print("Hello world, Docker is running sucessfully")

@@ -1,14 +1,13 @@
-FROM python:3.10-slim-bullseye
+FROM python:3.9-slim
 
-COPY requirements.txt requirements.txt
+# Copy the application code into the container
+COPY app.py .
 
-# install app dependencies
-RUN apt-get update && apt-get install -y python3 python3-pip
-RUN pip install -r requirements.txt
+# Install dependencies
+RUN pip install --no-cache-dir requests Flask
 
-# install app
-COPY app.py /
+# Expose the port that Flask will run on (5000 by default)
+EXPOSE 5000
 
-# final configuration
-EXPOSE 80
-CMD ["flask", "run", "--host", "0.0.0.0", "--port", "8085"]
+# Set the default command to run the Flask app
+CMD ["python", "./app.py"]
